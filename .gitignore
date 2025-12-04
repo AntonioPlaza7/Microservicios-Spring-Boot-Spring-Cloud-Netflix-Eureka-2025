@@ -1,0 +1,17 @@
+# Ignorar archivos generados de Java y entornos de desarrollo
+*.class
+*.jar
+*.war
+*.ear
+/target/
+/bin/
+
+# Ignorar el archivo grande que causó el problema:
+zipkin/zipkin-server-3.5.1-exec.jar
+
+# Entorno de VS Code
+.vscode/
+
+# Dependencias de Maven/Gradle
+.m2/
+.gradle/

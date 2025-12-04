@@ -1,0 +1,49 @@
+services:      
+  eureka-server:
+    container_name: eureka-server
+    image: antonioplaza7/eureka:latest
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - springcloud
+  
+  # mysql:
+  #   container_name: mysql
+  #   image: mysql:8.0
+  #   ports:
+  #     - "3307:3306"
+  #   restart: always
+  #   networks:
+  #     - springcloud
+  #   environment:
+  #     - MYSQL_DATABASE=db_springboot_cloud
+  #     - MYSQL_ROOT_PASSWORD=root 
+  
+  mvsc-products:
+    container_name: mvsc-products
+    image: antonioplaza7/products:latest    
+    restart: always
+    networks:
+      - springcloud
+    depends_on:
+      - mysql
+      - eureka-server
+  
+  msvc-items:
+    container_name: msvc-items
+    image: antonioplaza7/items:latest    
+    restart: always
+    ports:
+      - "8005:8005"
+    networks:
+      - springcloud
+    depends_on:
+      - eureka-server
+      - mvsc-products
+
+      
+      
+
+networks:
+  springcloud:
